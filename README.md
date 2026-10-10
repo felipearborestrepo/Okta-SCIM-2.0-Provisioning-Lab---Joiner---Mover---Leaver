@@ -93,17 +93,17 @@ This also confirmed the API and token worked locally before involving Okta.
 
 Okta Admin Console → **Applications** → **Create App Integration** → **SAML 2.0**. A custom app integration is needed to attach SCIM provisioning to it.
 
-![Create SAML app](images/05-create-saml-app.png)
+<img width="965" height="549" alt="Screenshot 2026-10-09 at 18 19 02" src="https://github.com/user-attachments/assets/6730dfbc-9f9d-40d7-8d76-52f1191b9568" />
 
 I named the app **SCIM Lab App** and entered the ngrok URL as the **Single sign-on URL** and **Audience URI**. SSO isn't tested in this lab; Okta requires these values to create the app.
 
-![SAML settings](images/06-saml-settings.png)
+<img width="899" height="613" alt="Screenshot 2026-10-09 at 18 20 40" src="https://github.com/user-attachments/assets/7cbe33c3-fbaa-4645-b9d1-e8a11b9b8407" />
 
 ## Step 5: Enable SCIM Provisioning
 
 On the app's **General** tab → **App Settings** → **Edit**, I set **Provisioning** to **SCIM**. This adds the **Provisioning** tab.
 
-![Enable SCIM provisioning](images/07-enable-scim.png)
+<img width="751" height="555" alt="Screenshot 2026-10-09 at 18 21 53" src="https://github.com/user-attachments/assets/254e97c7-6cd6-4f42-88e0-9e4a84da85f0" />
 
 ## Step 6: Connect Okta to the SCIM Server
 
@@ -117,11 +117,11 @@ On the app's **General** tab → **App Settings** → **Edit**, I set **Provisio
 | Authentication Mode | HTTP Header |
 | Authorization | `Bearer <your-token>` |
 
-![SCIM connection settings](images/08-scim-connection.png)
+<img width="795" height="592" alt="Screenshot 2026-10-09 at 18 24 02" src="https://github.com/user-attachments/assets/fda34a33-04b9-4284-b7a1-678a5074c667" />
 
 I clicked **Test Connector Configuration**. Okta successfully authenticated and detected the supported features: User Import, Import Profile Updates, Create Users, Update User Attributes, Push Groups, and Import Groups.
 
-![Connector configured successfully](images/09-connector-test-success.png)
+<img width="557" height="591" alt="Screenshot 2026-10-09 at 18 24 54" src="https://github.com/user-attachments/assets/3f91ef64-f9ed-418d-b4ad-7653568fab73" />
 
 ## Step 7: Enable Lifecycle Actions
 
@@ -131,7 +131,7 @@ I clicked **Test Connector Configuration**. Okta successfully authenticated and 
 - **Update User Attributes**: pushes Okta profile changes to the app
 - **Deactivate Users**: deactivates the app account when the user is unassigned or deactivated in Okta
 
-![To App settings](images/10-to-app-settings.png)
+<img width="1042" height="594" alt="Screenshot 2026-10-09 at 18 26 13" src="https://github.com/user-attachments/assets/8869ec9d-995d-49da-83c5-9826edaf62be" />
 
 ---
 
@@ -139,15 +139,15 @@ I clicked **Test Connector Configuration**. Okta successfully authenticated and 
 
 I assigned the app to a test user, **Alex Eng** (`alex.eng@yourlabdomain.com`), on the **Assignments** tab.
 
-![User assigned](images/11-assign-user.png)
+<img width="1127" height="410" alt="Screenshot 2026-10-09 at 18 34 07" src="https://github.com/user-attachments/assets/77632384-8659-4d58-9f4f-802870ae28ad" />
 
 Okta immediately sent a `POST /scim/v2/Users` request containing the user's profile: `userName`, name, email, display name, locale, department (`Engineering`, via the SCIM enterprise extension), and `externalId` (the user's Okta ID). The server responded **201 Created**.
 
-![POST request creating the user](images/13-log-user-created.png)
+<img width="788" height="115" alt="Screenshot 2026-10-09 at 18 43 41" src="https://github.com/user-attachments/assets/1c9f7abe-2969-4fce-bb28-8dbea0703917" />
 
 Alex Eng appeared on the app's dashboard as **Active**.
 
-![User created and active](images/12-dashboard-user-created.png)
+<img width="1106" height="500" alt="Screenshot 2026-10-09 at 18 35 38" src="https://github.com/user-attachments/assets/6053654b-d680-4321-9462-d9d4ae2fd781" />
 
 **What happened:** Assigning the app in Okta triggered automatic account creation in the target app, with no manual work in the app itself.
 
@@ -155,15 +155,15 @@ Alex Eng appeared on the app's dashboard as **Active**.
 
 I changed Alex Eng's **Title** in Okta to `Engineer`.
 
-![Title changed in Okta](images/14-okta-title-change.png)
+<img width="671" height="317" alt="Screenshot 2026-10-09 at 18 47 06" src="https://github.com/user-attachments/assets/dad6727e-d098-491a-9a11-b76208d3c35a" />
 
 Okta sent a `PUT /scim/v2/Users/{id}` request with the full updated user record, including `"title": "Engineer"`. The server responded **200 OK**.
 
-![PUT request updating the user](images/16-log-title-updated.png)
+<img width="779" height="65" alt="Screenshot 2026-10-09 at 18 47 37" src="https://github.com/user-attachments/assets/e1c0bb51-b9be-48c6-bcbc-797d2029937b" />
 
 The dashboard showed the new title.
 
-![Title updated in the app](images/15-dashboard-title-updated.png)
+<img width="1325" height="309" alt="Screenshot 2026-10-09 at 18 48 02" src="https://github.com/user-attachments/assets/6bc91ba3-f513-4387-a316-83cef741297b" />
 
 **What happened:** A profile change in Okta flowed to the app automatically, keeping the two systems in sync. Okta uses `PUT`, which replaces the whole user record with the current Okta values.
 
@@ -171,15 +171,15 @@ The dashboard showed the new title.
 
 I removed Alex Eng's assignment to the app by clicking the **X** on the **Assignments** tab.
 
-![User unassigned](images/17-unassign-user.png)
+<img width="803" height="490" alt="Screenshot 2026-10-09 at 18 48 53" src="https://github.com/user-attachments/assets/d23e7488-9d66-4e10-bc68-28c851ca5bc3" />
 
 Okta first sent a `GET` for the user's current record, then a `PUT /scim/v2/Users/{id}` with **`"active": false`**. The server responded **200 OK**.
 
-![PUT request with active false](images/18-log-user-deactivated.png)
+<img width="794" height="166" alt="Screenshot 2026-10-09 at 18 49 27" src="https://github.com/user-attachments/assets/c74fe770-0a96-4ded-9c63-5b0f4b25065f" />
 
 The dashboard showed Alex Eng as **Deactivated**.
 
-![User deactivated in the app](images/19-dashboard-user-deactivated.png)
+<img width="1400" height="314" alt="Screenshot 2026-10-09 at 18 49 57" src="https://github.com/user-attachments/assets/16720989-a962-4d07-8123-e9eaa8e740cc" />
 
 **What happened:** Removing access in Okta automatically disabled the user's account in the app. Okta **deactivates** instead of deleting, which keeps the account and its history for auditing and allows reactivation if the user is reassigned. This prevents orphaned accounts when someone leaves.
 
@@ -187,15 +187,15 @@ The dashboard showed Alex Eng as **Deactivated**.
 
 On the **Push Groups** tab, I pushed the Okta group **Dept-Engineering** to the app. Okta shows the push status as **Active**.
 
-![Group pushed](images/20-push-groups.png)
+<img width="1038" height="556" alt="Screenshot 2026-10-09 at 18 54 04" src="https://github.com/user-attachments/assets/f97a849e-cdb6-4b81-be36-c053ce0d7d97" />
 
 Okta sent a `POST /scim/v2/Groups` to create the group (**201 Created**), then a `GET` and a `PUT` to sync its membership.
 
-![POST request creating the group](images/21-log-group-created.png)
+<img width="777" height="128" alt="Screenshot 2026-10-09 at 18 54 41" src="https://github.com/user-attachments/assets/b2543062-c98a-446e-999d-36912831d86f" />
 
 The group appeared in the app's dashboard.
 
-![Group in the app](images/22-dashboard-group.png)
+<img width="1364" height="434" alt="Screenshot 2026-10-09 at 18 55 18" src="https://github.com/user-attachments/assets/e8ff4689-4296-42a8-8749-1d4f713d018a" />
 
 **Note:** The group was pushed with **0 members**. Group push only syncs members who are also assigned to the app, and Alex Eng had already been unassigned in the leaver test. To show membership sync, assign the app to the group's members (or to the group itself) and push again.
 
