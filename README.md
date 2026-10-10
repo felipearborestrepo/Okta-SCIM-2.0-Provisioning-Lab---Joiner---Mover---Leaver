@@ -224,11 +224,3 @@ Getting the connection working took several fixes. Each one is a common real-wor
 | Server: **"Address already in use"** | An earlier server instance was still running on port 5000 | Stopped the old process before starting a new one |
 
 **Lesson:** Reading the server's request log made each failure easy to diagnose: no request at all meant a network or tunnel problem, a 404 meant the wrong URL path, and a 401 meant a token mismatch.
-
-## Security Notes
-
-- **Okta sends a generated password in the create request.** It's visible in the raw SCIM body, so request logs must be treated as sensitive. In production, apps using SSO typically don't need passwords, and **Sync Password** should stay disabled.
-- **Bearer tokens and the ngrok authtoken are secrets.** Blur them in screenshots, and rotate any that were exposed.
-- **This server is for lab use only.** It stores data in memory, uses a simple static token, and runs on Flask's development server. Production SCIM endpoints should use long random tokens or OAuth 2.0, HTTPS on a real domain, persistent storage, and rate limiting.
-- **ngrok makes the server publicly reachable.** I stopped the tunnel and server when the lab was finished.
-
