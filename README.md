@@ -58,7 +58,7 @@ SCIM_TOKEN=<your-token> python3 scim_server.py
 
 The server listens on port 5000 and exposes the SCIM API at `/scim/v2` and a dashboard at `/`.
 
-![SCIM server running](images/01-server-running.png)
+<img width="789" height="188" alt="Screenshot 2026-10-09 at 18 11 30" src="https://github.com/user-attachments/assets/76ec5f1e-6d7b-4b35-a864-5b42a3a83286" />
 
 ## Step 2: Expose the Server with ngrok
 
@@ -69,11 +69,11 @@ ngrok config add-authtoken <ngrok-authtoken>
 ngrok http 5000
 ```
 
-![ngrok authtoken page](images/02-ngrok-authtoken.png)
+<img width="1407" height="471" alt="Screenshot 2026-10-09 at 18 44 23" src="https://github.com/user-attachments/assets/0c2601a3-bd30-42d8-b1fa-b0f31cd665d6" />
 
 ngrok returned a public **Forwarding** URL. The SCIM base URL for Okta is that URL plus `/scim/v2`.
 
-![ngrok forwarding URL](images/03-ngrok-forwarding.png)
+<img width="558" height="262" alt="Screenshot 2026-10-09 at 18 13 05" src="https://github.com/user-attachments/assets/de3a13fa-87f3-4b79-b1ca-ed5ba14b4f2f" />
 
 ## Step 3: Seed a Test User
 
@@ -85,8 +85,7 @@ curl -s -X POST http://localhost:5000/scim/v2/Users \
   -H "Content-Type: application/json" \
   -d '{"userName":"seed.user@scimlab.test","name":{"givenName":"Seed","familyName":"User"},"active":true}'
 ```
-
-![Seed user created](images/04-seed-user.png)
+<img width="787" height="300" alt="Screenshot 2026-10-09 at 18 14 18" src="https://github.com/user-attachments/assets/c0025bea-fde8-4c9a-83a3-e98691077746" />
 
 This also confirmed the API and token worked locally before involving Okta.
 
