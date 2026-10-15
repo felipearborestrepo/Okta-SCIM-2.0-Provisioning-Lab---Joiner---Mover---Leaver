@@ -40,7 +40,7 @@ scim_server.py on my Mac (localhost:5000)
 
 | Term | Meaning |
 |---|---|
-| **SCIM 2.0** | An open standard (RFC 7643/7644) for automatically creating, updating, and deactivating user accounts across systems using a REST API |
+| **SCIM 2.0** | (System for Cross-domain Identity Management) An open standard (RFC 7643/7644) for automatically creating, updating, and deactivating user accounts across systems using a REST API |
 | **Provisioning** | Creating or updating a user's account in an app automatically |
 | **Deprovisioning** | Removing or deactivating a user's access automatically |
 | **Joiner / Mover / Leaver** | The three lifecycle events: a new hire, a role change, and a departure |
